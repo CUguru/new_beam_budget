@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="31px" height="31px" viewBox="0 0 31 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>F874AFA3-AFF2-46BD-B6D9-63CD6E359F3C</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <circle id="path-1" cx="15.6032482" cy="15.6512185" r="15.3487815"></circle>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0963541667 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Resting-Copy-2" transform="translate(-1116.000000, -367.000000)">
+            <g id="Group-11" transform="translate(1116.000000, 367.000000)">
+                <g id="Oval-2">
+                    <use fill="#E9E9E9" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                </g>
+                <path d="M17.1792377,14.075229 L17.1792377,9.66277465 C17.1792377,8.79590339 16.4736432,8.08646892 15.6032482,8.08646892 C14.726785,8.08646892 14.0272587,8.79220503 14.0272587,9.66277465 L14.0272587,14.075229 L9.61480438,14.075229 C8.74793313,14.075229 8.03849866,14.7808235 8.03849866,15.6512185 C8.03849866,16.5276817 8.74423477,17.227208 9.61480438,17.227208 L14.0272587,17.227208 L14.0272587,21.6396623 C14.0272587,22.5065335 14.7328532,23.215968 15.6032482,23.215968 C16.4797114,23.215968 17.1792377,22.5102319 17.1792377,21.6396623 L17.1792377,17.227208 L21.591692,17.227208 C22.4585633,17.227208 23.1679978,16.5216134 23.1679978,15.6512185 C23.1679978,14.7747553 22.4622616,14.075229 21.591692,14.075229 L17.1792377,14.075229 Z" id="Combined-Shape" fill-opacity="0.5" fill="#808080" transform="translate(15.603248, 15.651218) rotate(-315.000000) translate(-15.603248, -15.651218) "></path>
+            </g>
+        </g>
+    </g>
+</svg>
