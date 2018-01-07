@@ -4,6 +4,9 @@
                     </form>
 
 
+<Route path='/dashboard' render={({}) => (
+                    <Dashboard username={this.state.username} />
+                )}/>
 
 <button onClick={this.openModal}>Add New Entry</button>
                 <ReactModal
