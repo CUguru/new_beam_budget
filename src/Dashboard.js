@@ -3,6 +3,7 @@ import './App.css';
 import { guid } from './helpers/helper'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { greenLogo } from './importImages/images'
 
 class Dashboard extends Component {
     constructor(props) {
@@ -147,24 +148,31 @@ class Dashboard extends Component {
         // console.log(username);
         return (
             <div className='dashboard'>
+
                 <div className='dashboard--upper-section'>
-                    <p id='user-name'>Welcome { username }</p>
+                    <div className='logo' id='white-logo'>
+                        <img src={ greenLogo } className='logo--image' alt='Beam White Logo'/>
+                    </div>
+                    <div className='username--section'>
+                        <p id='user-name'>{`Welcome ${ username }.`}</p>
+                    </div>
+
                     <div className='financial--summary'>
                         <div className='individual--amounts'>
                             <h3>INCOME</h3>
-                            <p>{ `$${income}` }</p>
+                            <p className='amounts'>{ `$${income}` }</p>
                         </div>
                         <div className='individual--amounts'>
                             <h3>EXPENSES</h3>
-                            <p>{ `$${expenses}` }</p>
+                            <p className='amounts'>{ `$${expenses}` }</p>
                         </div>
                         <div className='individual--amounts'>
                             <h3>BALANCE</h3>
-                            <p>{ `$${budget}` }</p>
+                            <p className='amounts'>{ `$${budget}` }</p>
                         </div>
-                    </div>
-                    <div className='svg--chart'>
-                        <div className="svg--placeholder"></div>
+                        <div className='svg--chart'>
+                            <div className="svg--placeholder">Chart will go here</div>
+                        </div>
                     </div>
                 </div>
 
@@ -174,9 +182,9 @@ class Dashboard extends Component {
                         <ol className='type-columns income'>
                             {allItems.filter((item) => (
                                 item.type === 'income')).map((income) => (
-                                <li key={income.id} className="contact-details">
-                                    <p>{income.description}</p>
-                                    <p>{income.amount}</p>
+                                <li key={income.id} className="entry--details">
+                                    <p className="entry--description">{income.description}</p>
+                                    <p className="entry--amount">{income.amount}</p>
                                     <button onClick={() => this.deleteEntry(income)}>Delete</button>
                                 </li>
                             ))}
@@ -188,19 +196,19 @@ class Dashboard extends Component {
                             <label> Amount:<br />
                                 <input type="number" name="amount" placeholder="amount" value={this.state.amount} onChange={this.handleChange.bind(this)}/>
                             </label><br />
-                            <input type="submit" value="Submit" />
+                            <input type="submit" value="Save" />
                             <button onClick={this.toggleForm1}>Cancel</button>
                         </form>
-                        <button onClick={this.toggleForm1} className='button--new-entry'>Add Income</button>
+                        <button onClick={this.toggleForm1} className='button--new-entry'>Add</button>
                     </div>
                     <div className='expense--list'>
                         <h5>Money Out</h5>
                         <ol className='type-columns expenses'>
                             {allItems.filter((item) => (
                                 item.type === 'expense')).map((expense) => (
-                                <li key={expense.id} className="contact-details">
-                                    <p>{expense.description}</p>
-                                    <p>{expense.amount}</p>
+                                <li key={expense.id} className="entry--details">
+                                    <p className="entry--description">{expense.description}</p>
+                                    <p className="entry--amount">{expense.amount}</p>
                                     <button onClick={() => this.deleteEntry(expense)}>Delete</button>
                                 </li>
                             ))}
@@ -212,10 +220,10 @@ class Dashboard extends Component {
                             <label> Amount:<br />
                                 <input type="number" name="amount" placeholder="amount" value={this.state.amount} onChange={this.handleChange.bind(this)}/>
                             </label><br />
-                            <input type="submit" value="Submit" />
+                            <input type="submit" value="Save" />
                             <button onClick={this.toggleForm2}>Cancel</button>
                         </form>
-                        <button onClick={this.toggleForm2} className='button--new-entry'>Add Expense</button>
+                        <button onClick={this.toggleForm2} className='button--new-entry'>Add</button>
                     </div>
                 </div>
             </div>
