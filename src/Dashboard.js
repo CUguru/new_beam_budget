@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { guid } from './helpers/helper'
 import PropTypes from 'prop-types'
-// import Modal from 'react-modal'
-// import * as Images from './importImages/images'
+import { Link } from 'react-router-dom'
 
 class Dashboard extends Component {
     constructor(props) {
@@ -18,11 +17,7 @@ class Dashboard extends Component {
             budget: 0,
             showing1: false,
             showing2: false
-            // modalIsOpen: false
         }
-
-        // this.openModal = this.openModal.bind(this);
-        // this.closeModal = this.closeModal.bind(this);
     }
 
     toggleForm1 = () => {
@@ -59,7 +54,6 @@ class Dashboard extends Component {
         if(this.state.allItems.length >= 0) {
             this.calculateTotal(this.state.allItems);
         }
-
     }
 
     calculateTotal(array) {
@@ -142,7 +136,7 @@ class Dashboard extends Component {
             display: this.state.showing2 ? "block" : "none"
         };
 
-        console.log(this.state.type);
+        // console.log(this.state.type);
 
         if(this.state.allItems.length > 0) {
             const allItems = this.state.allItems
@@ -188,7 +182,7 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-    username: PropTypes.func.isRequired
+    username: PropTypes.string.isRequired
 }
 export default Dashboard;
 

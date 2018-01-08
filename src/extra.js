@@ -1,3 +1,35 @@
+
+<form>
+                    <input
+                    type='text'
+                    value={username}
+                    onChange={(event) => this.updateName(event.target.value)}
+                />
+                    <button onClick>Get Started</button>
+                </form>
+
+                <Link to='/dashboard'>Get Started</Link>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <form>
                         <input type='text' name='description' value={this.state.description} placeholder='Enter Description' onChange={this.handleChange.bind(this)} />
                         <input type='number' name='amount' value={this.state.amount} onChange={this.handleChange.bind(this)}/>
@@ -284,7 +316,62 @@ class App extends Component {
 export default App;
 
 
+import React, { Component } from 'react'
+// import escapeRegExp from 'escape-string-regexp'
+import { Route, Link } from 'react-router-dom'
+import Dashboard from './Dashboard'
 
+class App extends Component {
+    constructor() {
+        super();
+        this.state = {
+            username: '',
+            shown: true
+        }
+    }
 
+    updateName = (username) => {
+        this.setState({
+            username: username
+        })
+        this.props.onUserInput(this.state.username)
+    }
+
+    toggle = () => {
+        this.setState({
+            shown: !this.state.shown
+        })
+    }
+
+    render() {
+        const { username } = this.state
+        var showForm = {
+            display: this.state.shown ? "block" : "none"
+        };
+
+        return (
+            <div className='App'>
+                <form style={ showForm }>
+                    <input
+                        type='text'
+                        value={username}
+                        onChange={(event) => this.updateName(event.target.value)}
+                    />
+                    <Link to='/dashboard' onClick={this.toggle}>Get Started</Link>
+                </form>
+
+                <Route path='/dashboard' render={() => (
+                    <Dashboard username={this.state.username} />
+                )}/>
+            </div>
+        )
+    }
+}
+
+export default App;
+
+<Route path='/dashboard' render={() => (
+                    <Dashboard username={this.state.username} />
+                )}/>
 
 

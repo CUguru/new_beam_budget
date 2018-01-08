@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import escapeRegExp from 'escape-string-regexp'
-import { Route, Link } from 'react-router-dom'
-import Dashboard from './Dashboard'
+// import escapeRegExp from 'escape-string-regexp'
+import { Link } from 'react-router-dom'
+// import Dashboard from './Dashboard'
+import PropTypes from 'prop-types'
 
 class Form extends Component {
 	constructor() {
@@ -12,27 +13,39 @@ class Form extends Component {
 	}
 
 	updateName = (username) => {
-		this.setState({
-			username: username
-		})
-	}
+        this.setState({
+            username: username
+        }, () => {this.props.onUserInput(this.state.username)})
+        // this.props.onUserInput(this.state.username)
+    }
+
+    // onSubmit = (event) => {
+    // 	event.preventDefault();
+    // 	this.props.onUserInput(this.state.username)
+    // }
 
 	render() {
 		const { username } = this.state
+		// console.log(username)
 		return (
 			<div className='form'>
-				<input
+				<form>
+					<input
 					type='text'
 					value={username}
 					onChange={(event) => this.updateName(event.target.value)}
 				/>
+				</form>
+
 				<Link to='/dashboard'>Get Started</Link>
-				<Route path='/dashboard' render={() => (
-					<Dashboard username={this.state.username} />
-				)}/>
 			</div>
 		)
 	}
 }
 
 export default Form;
+
+
+Form.propTypes = {
+	onUserInput: PropTypes.func.isRequired
+}
