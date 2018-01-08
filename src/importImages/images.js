@@ -1,8 +1,11 @@
-import modalButton from '../images/openModal.svg'
-import closeButton from '../images/closeModal.svg'
-import logo from '../images/beamGreenLogo.png'
+import greenLogo from '../images/beamGreenLogo.png'
+import whiteLogo from '../images/beamWhiteLogo.png'
+import financialHealth from '../images/financialHealth.svg'
+import quickEntry from '../images/QuickEntry.svg'
 
 export {
-	modalButton,
-	closeButton
+	greenLogo,
+	whiteLogo,
+	financialHealth,
+	quickEntry
 }
