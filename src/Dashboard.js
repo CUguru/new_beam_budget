@@ -147,7 +147,22 @@ class Dashboard extends Component {
         // console.log(username);
         return (
             <div className='dashboard'>
+                <p>Welcome { username }</p>
 
+                <div className='financial--summary'>
+                    <div className='individual--amounts'>
+                        <h3>INCOME</h3>
+                        <p>{ `$${income}` }</p>
+                    </div>
+                    <div className='individual--amounts'>
+                        <h3>EXPENSES</h3>
+                        <p>{ `$${expenses}` }</p>
+                    </div>
+                    <div className='individual--amounts'>
+                        <h3>BALANCE</h3>
+                        <p>{ `$${budget}` }</p>
+                    </div>
+                </div>
                     <form style={ showHideForm1 } onSubmit={this.handleSubmit.bind(this)}>
                         <label> Description:<br />
                             <input type="text" name="description" placeholder="description" value={this.state.description} onChange={this.handleChange.bind(this)} />
@@ -158,7 +173,7 @@ class Dashboard extends Component {
                         <input type="submit" value="Submit" />
                         <button onClick={this.toggleForm1}>Cancel</button>
                     </form>
-                    <button onClick={this.toggleForm1}>ShowForm1</button>
+                    <button onClick={this.toggleForm1}>Add Income</button>
 
                     <form style={ showHideForm2 } onSubmit={this.handleSubmit.bind(this)}>
                         <label> Description:<br />
@@ -170,12 +185,30 @@ class Dashboard extends Component {
                         <input type="submit" value="Submit" />
                         <button onClick={this.toggleForm2}>Cancel</button>
                     </form>
-                    <button onClick={this.toggleForm2}>ShowForm2</button>
+                    <button onClick={this.toggleForm2}>Add Expense</button>
 
                     <div>
-                        <p>{ budget }</p>
-                        <p>{ username }</p>
-                    </div>
+                    <ol className='type-columns income'>
+                        {allItems.filter((item) => (
+                            item.type === 'income')).map((income) => (
+                            <li key={income.id} className="contact-details">
+                                <p>{income.description}</p>
+                                <p>{income.amount}</p>
+                                <button onClick={() => this.deleteEntry(income)}>Delete</button>
+                            </li>
+                        ))}
+                    </ol>
+                    <ol className='type-columns expenses'>
+                        {allItems.filter((item) => (
+                            item.type === 'expense')).map((expense) => (
+                            <li key={expense.id} className="contact-details">
+                                <p>{expense.description}</p>
+                                <p>{expense.amount}</p>
+                                <button onClick={() => this.deleteEntry(expense)}>Delete</button>
+                            </li>
+                        ))}
+                    </ol>
+                </div>
             </div>
         )
     }

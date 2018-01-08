@@ -12,14 +12,90 @@
 }
 
 .logo--image {
-  width: 60%;
+  width: 70%;
+  min-width: 81.9px;
+  max-width: 90px;
 }
 
 .gradient-background {
-  background: linear-gradient(to right, #43cea2, #185a9d);
-  height: 60vh;
+  background: linear-gradient(69deg, #43cea2, #3fc3a2 10%, #3ec2a2 10%, #23799e 74%, #185a9d);
+  height: 65vh;
   min-height: 300px;
   max-height: 640px;
+  color: #fff;
 }
+
+/* h2 styling */
+#beam--welcome {
+  padding-top: 5em;
+  padding-bottom: 1em;
+  font-weight: 100;
+  color: #fff;
+  /*letter-spacing: .rem;*/
+  font-size: 36px;
+}
+
+.beam--intro {
+  font-size: 22px;
+  font-weight: 300;
+  letter-spacing: normal;
+  padding-bottom: 71px;
+}
+
+.intro--form {
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid #fff;
+  padding-bottom: 10px;
+  text-align: left;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 300;
+}
+
+/* placeholder styling */
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #fff;
+  opacity: .5;
+}
+
+.button--get-started {
+  border: 2px solid #fff;
+  border-radius: 50px;
+  padding: 16px 32px;
+  color: #fff;
+  font-weight: 300;
+  margin-left: 75px;
+  transition: background-color .3s, color .3s;
+}
+
+.button--get-started:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* lower sections */
+.beam--benefits {
+  display: inline-block;
+  width: 25%;
+  /*border: 1px solid black;*/
+  margin-top: 3em;
+}
+
+.beam--benefits p {
+  padding: .8em 6em;
+  font-weight: 400;
+  font-size: 13px;
+  color:  #808080;
+}
+
+.beam--benefits h4 {
+  font-size: 20px;
+  color: #43cea2;
+  font-weight: 400;
+  padding-top: .8em;
+}
+
+/* styling for amount display sections */
 
 
