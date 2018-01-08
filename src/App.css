@@ -117,7 +117,7 @@
   background-color: red;
   padding: 20px;
   border-radius: 50%;
-}
+}*/
 .individual--amounts {
   display: inline-block;
   width: 20%;
@@ -126,7 +126,7 @@
 .individual--amounts h3 {
   padding-bottom: 2em;
 }
-/* dashboard styling */
+/* dashboard styling
 /*.dashboard--upper-section {
   background-color: rgba(246, 246, 246, 0.45);
 }
