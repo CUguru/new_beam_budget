@@ -147,67 +147,76 @@ class Dashboard extends Component {
         // console.log(username);
         return (
             <div className='dashboard'>
-                <p>Welcome { username }</p>
-
-                <div className='financial--summary'>
-                    <div className='individual--amounts'>
-                        <h3>INCOME</h3>
-                        <p>{ `$${income}` }</p>
+                <div className='dashboard--upper-section'>
+                    <p id='user-name'>Welcome { username }</p>
+                    <div className='financial--summary'>
+                        <div className='individual--amounts'>
+                            <h3>INCOME</h3>
+                            <p>{ `$${income}` }</p>
+                        </div>
+                        <div className='individual--amounts'>
+                            <h3>EXPENSES</h3>
+                            <p>{ `$${expenses}` }</p>
+                        </div>
+                        <div className='individual--amounts'>
+                            <h3>BALANCE</h3>
+                            <p>{ `$${budget}` }</p>
+                        </div>
                     </div>
-                    <div className='individual--amounts'>
-                        <h3>EXPENSES</h3>
-                        <p>{ `$${expenses}` }</p>
-                    </div>
-                    <div className='individual--amounts'>
-                        <h3>BALANCE</h3>
-                        <p>{ `$${budget}` }</p>
+                    <div className='svg--chart'>
+                        <div className="svg--placeholder"></div>
                     </div>
                 </div>
-                    <form style={ showHideForm1 } onSubmit={this.handleSubmit.bind(this)}>
-                        <label> Description:<br />
-                            <input type="text" name="description" placeholder="description" value={this.state.description} onChange={this.handleChange.bind(this)} />
-                        </label><br />
-                        <label> Amount:<br />
-                            <input type="number" name="amount" placeholder="amount" value={this.state.amount} onChange={this.handleChange.bind(this)}/>
-                        </label><br />
-                        <input type="submit" value="Submit" />
-                        <button onClick={this.toggleForm1}>Cancel</button>
-                    </form>
-                    <button onClick={this.toggleForm1}>Add Income</button>
 
-                    <form style={ showHideForm2 } onSubmit={this.handleSubmit.bind(this)}>
-                        <label> Description:<br />
-                            <input type="text" name="description" placeholder="description" value={this.state.description} onChange={this.handleChange.bind(this)} />
-                        </label><br />
-                        <label> Amount:<br />
-                            <input type="number" name="amount" placeholder="amount" value={this.state.amount} onChange={this.handleChange.bind(this)}/>
-                        </label><br />
-                        <input type="submit" value="Submit" />
-                        <button onClick={this.toggleForm2}>Cancel</button>
-                    </form>
-                    <button onClick={this.toggleForm2}>Add Expense</button>
-
-                    <div>
-                    <ol className='type-columns income'>
-                        {allItems.filter((item) => (
-                            item.type === 'income')).map((income) => (
-                            <li key={income.id} className="contact-details">
-                                <p>{income.description}</p>
-                                <p>{income.amount}</p>
-                                <button onClick={() => this.deleteEntry(income)}>Delete</button>
-                            </li>
-                        ))}
-                    </ol>
-                    <ol className='type-columns expenses'>
-                        {allItems.filter((item) => (
-                            item.type === 'expense')).map((expense) => (
-                            <li key={expense.id} className="contact-details">
-                                <p>{expense.description}</p>
-                                <p>{expense.amount}</p>
-                                <button onClick={() => this.deleteEntry(expense)}>Delete</button>
-                            </li>
-                        ))}
-                    </ol>
+                <div className='dashboard--log-section'>
+                    <div className='income--list'>
+                        <h5>Money In</h5>
+                        <ol className='type-columns income'>
+                            {allItems.filter((item) => (
+                                item.type === 'income')).map((income) => (
+                                <li key={income.id} className="contact-details">
+                                    <p>{income.description}</p>
+                                    <p>{income.amount}</p>
+                                    <button onClick={() => this.deleteEntry(income)}>Delete</button>
+                                </li>
+                            ))}
+                        </ol>
+                        <form style={ showHideForm1 } onSubmit={this.handleSubmit.bind(this)}>
+                            <label> Description:<br />
+                                <input type="text" name="description" placeholder="description" value={this.state.description} onChange={this.handleChange.bind(this)} />
+                            </label><br />
+                            <label> Amount:<br />
+                                <input type="number" name="amount" placeholder="amount" value={this.state.amount} onChange={this.handleChange.bind(this)}/>
+                            </label><br />
+                            <input type="submit" value="Submit" />
+                            <button onClick={this.toggleForm1}>Cancel</button>
+                        </form>
+                        <button onClick={this.toggleForm1} className='button--new-entry'>Add Income</button>
+                    </div>
+                    <div className='expense--list'>
+                        <h5>Money Out</h5>
+                        <ol className='type-columns expenses'>
+                            {allItems.filter((item) => (
+                                item.type === 'expense')).map((expense) => (
+                                <li key={expense.id} className="contact-details">
+                                    <p>{expense.description}</p>
+                                    <p>{expense.amount}</p>
+                                    <button onClick={() => this.deleteEntry(expense)}>Delete</button>
+                                </li>
+                            ))}
+                        </ol>
+                        <form style={ showHideForm2 } onSubmit={this.handleSubmit.bind(this)}>
+                            <label> Description:<br />
+                                <input type="text" name="description" placeholder="description" value={this.state.description} onChange={this.handleChange.bind(this)} />
+                            </label><br />
+                            <label> Amount:<br />
+                                <input type="number" name="amount" placeholder="amount" value={this.state.amount} onChange={this.handleChange.bind(this)}/>
+                            </label><br />
+                            <input type="submit" value="Submit" />
+                            <button onClick={this.toggleForm2}>Cancel</button>
+                        </form>
+                        <button onClick={this.toggleForm2} className='button--new-entry'>Add Expense</button>
+                    </div>
                 </div>
             </div>
         )

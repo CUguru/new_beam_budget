@@ -97,5 +97,81 @@
 }
 
 /* styling for amount display sections */
+.financial--summary {
+  display: inline-block;
+  width: 65%;
+  text-align: left;
+  border: 1px solid black;
+}
+
+.svg--chart {
+  display: inline-block;
+  width: 25%;
+  /*background-color: red;*/
+  /*border: 1px solid black;*/
+  /*border-radius: 50%;*/
+  /*padding: 100px;*/
+}
+/*.svg--placeholder {
+  width: 100%;
+  background-color: red;
+  padding: 20px;
+  border-radius: 50%;
+}
+.individual--amounts {
+  display: inline-block;
+  width: 20%;
+}
+
+.individual--amounts h3 {
+  padding-bottom: 2em;
+}
+/* dashboard styling */
+/*.dashboard--upper-section {
+  background-color: rgba(246, 246, 246, 0.45);
+}
+#user-name {
+  border: 1px solid black;
+  width: 65%;
+  text-align: left;
+}*/
+
+/* list for data entries */
+.dashboard--log-section {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.type-columns {
+  list-style: none;
+}
+
+.income--list,
+.expense--list {
+  display: inline-block;
+  width: 45%;
+  margin-right: 1.5%;
+}
+
+.button--new-entry {
+  border: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
