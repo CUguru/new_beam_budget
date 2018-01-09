@@ -5,15 +5,14 @@
 .logo {
   position: absolute;
   top: 9%;
-  left: 4%;
+  left: 5%;
   width: 5%;
-  /*border: 1px solid black;*/
   text-align: left;
 }
 
 .logo--image {
   width: 70%;
-  min-width: 71.9px;
+  min-width: 51.9px;
   max-width: 81.9px;
 }
 
@@ -54,7 +53,7 @@
 }
 
 /* placeholder styling */
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+.intro--form::-webkit-input-placeholder  { /* Chrome/Opera/Safari */
   color: #fff;
   opacity: .5;
 }
@@ -78,7 +77,6 @@
 .beam--benefits {
   display: inline-block;
   width: 25%;
-  /*border: 1px solid black;*/
   margin-top: 3em;
 }
 
@@ -98,7 +96,6 @@
 
 /* styling for amount display sections */
 .financial--summary {
-  /*border: 1px solid black;*/
   width: 80%;
   margin-right: auto;
   margin-left: auto;
@@ -109,7 +106,6 @@
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-  /*border: 1px solid black;*/
   text-align: left;
   padding-top: 12em;
 }
@@ -134,7 +130,6 @@
 .individual--amounts {
   display: inline-block;
   width: 20%;
-  border: 1px solid black;
 }
 
 .individual--amounts h3 {
@@ -152,7 +147,7 @@
 .svg--chart {
   display: inline-block;
   width: 30%;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
 }
 
 /* list for data entries */
@@ -170,8 +165,9 @@
 .income--list,
 .expense--list {
   display: inline-block;
-  width: 45%;
+  width: 48%;
   margin-right: 1.5%;
+  /*border: 1px solid black;*/
 }
 
 .button--new-entry {
@@ -184,11 +180,13 @@
   cursor: pointer;
   opacity: .8;
   transition: opacity .3s;
+  margin-top: 3em;
 }
 
 .button--new-entry:hover {
   opacity: 1;
 }
+
 h5 {
   font-size: 13px;
   font-weight: 400;
@@ -196,16 +194,40 @@ h5 {
   color: #808080;
 }
 
+.entry--details {
+  position: relative;
+}
+.entry--description,
+.entry--amount,
+.amount-and-button {
+  display: inline-block;
+}
 
+.entry--amount {
+  cursor: pointer;
+}
 
+.entry--amout:hover {
+  color: red;
+}
+.amount-and-button {
+  position: absolute;
+  right: 1.5em;
+}
 
-
-
-
-
-
-
-
+.button--cancel,
+.button--save-entry {
+  border: none;
+  background-color: #dbdbdb;
+  border-radius: 50px;
+  padding: 1.2em 4.5em;
+  font-weight: 400;
+  color: #808080;
+  cursor: pointer;
+  opacity: .8;
+  transition: opacity .3s;
+  margin-right: 3em;
+}
 
 
 
