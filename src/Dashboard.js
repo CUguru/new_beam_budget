@@ -7,12 +7,71 @@ import { greenLogo } from './importImages/images'
 
 var styles = {
     out: {
-        backgroundColor: 'red'
+        backgroundColor: 'white'
     },
     in: {
-        backgroundColor: 'blue'
+        backgroundColor: 'white'
     }
 }
+
+class ProgressCircle extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
+    render() {
+        const squareSize = this.props.squareSize;
+
+        const circleRadius = (this.props.squareSize - this.props.strokeWidth) / 2;
+
+        const viewBox = `0 0 ${squareSize} ${squareSize}`;
+
+        const dashArray = circleRadius * Math.PI * 2;
+
+        const offsetDash = dashArray - dashArray * this.props.percentage / 100;
+
+        return(
+            <svg
+                width={this.props.squareSize}
+                height={this.props.squareSize}
+                viewBox={viewBox}>
+                <circle
+                    className="progress-circle-background"
+                    cx={this.props.squareSize / 2}
+                    cy={this.props.squareSize / 2}
+                    r={circleRadius}
+                    strokeWidth={`${3}px`} />
+
+                <circle
+                    className="progress-circle-path"
+                    cx={this.props.squareSize / 2}
+                    cy={this.props.squareSize / 2}
+                    r={circleRadius}
+                    strokeWidth={`${this.props.strokeWidth}px`}
+                    transform={`rotate(-90 ${this.props.squareSize / 2} ${this.props.squareSize / 2})`}
+                    style={{
+                        strokeDasharray: dashArray,
+                        strokeDashoffset: offsetDash
+                    }} />
+                    <text
+                        className="financial-health-text"
+                        x="50%"
+                        y="50%"
+                        dy=".3em"
+                        textAnchor="middle">
+                        {`${this.props.percentage}%`}
+                    </text>
+            </svg>
+        );
+    }
+}
+
+ProgressCircle.defaultProps = {
+    squareSize: 200,
+    percentage: 0,
+    strokeWidth: 10
+};
 
 class Dashboard extends Component {
     constructor(props) {
@@ -29,7 +88,9 @@ class Dashboard extends Component {
             showing2: false,
             showAddButton1: true,
             showAddButton2: true,
-            hover: 'out'
+            hover: 'out',
+            username: this.props.username,
+            percentage: 0
         };
     }
 
@@ -45,10 +106,24 @@ class Dashboard extends Component {
         })
     }
 
-    toggleForm1 = () => {
-        if(this.state.showing2 === true) {
+    getPercentage = () => {
+        let percentage;
+        if((this.state.income === 0) || (this.state.budget === 0)) {
             this.setState({
-                showing2: !this.state.showing2
+                percentage: 0
+            })
+        } else {
+            percentage = (this.state.budget / this.state.income) * 100
+            this.setState({
+                percentage: percentage
+            })
+        }
+    }
+    toggleForm1 = () => {
+        if((this.state.showing2 === true) && (this.state.showAddButton2 === false)) {
+            this.setState({
+                showing2: !this.state.showing2,
+                showAddButton2: !this.state.showAddButton2
             })
         }
         this.setState({
@@ -67,9 +142,10 @@ class Dashboard extends Component {
     }
 
     toggleForm2 = () => {
-        if(this.state.showing1 === true) {
+        if((this.state.showing1 === true) && (this.state.showAddButton1 === false)) {
             this.setState({
-                showing1: !this.state.showing1
+                showing1: !this.state.showing1,
+                showAddButton1: !this.state.showAddButton1
             })
         }
         this.setState({
@@ -127,7 +203,7 @@ class Dashboard extends Component {
         const budget = this.state.income - this.state.expenses;
         this.setState({
             budget
-        }, () => console.log(`Budget: ${this.state.budget}`))
+        }, this.getPercentage)
     }
 
     deleteEntry(item) {
@@ -154,6 +230,10 @@ class Dashboard extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        if(this.state.description === "") {
+            alert('You need to enter a description');
+            return;
+        }
 
         let newItem = {
             id: guid(),
@@ -185,13 +265,13 @@ class Dashboard extends Component {
         var showHideButton2 = {
             display: this.state.showAddButton2 ? "block" : "none"
         }
-        // console.log(this.state.type);
 
-        if(this.state.allItems.length > 0) {
-            const allItems = this.state.allItems
-        }
-        const { username } = this.props
-        const { income, expenses, budget, allItems } = this.state
+
+        // if(this.state.allItems.length >= 0) {
+        //     const allItems = this.state.allItems
+        // }
+        // const { username } = this.props
+        const { income, expenses, budget, allItems, username } = this.state
 
         // console.log(username);
         return (
@@ -207,26 +287,30 @@ class Dashboard extends Component {
 
                     <div className='financial--summary'>
                         <div className='individual--amounts'>
-                            <h3>INCOME</h3>
+                            <strong><h3>INCOME</h3></strong>
                             <p className='amounts'>{ `$${income}` }</p>
                         </div>
                         <div className='individual--amounts'>
-                            <h3>EXPENSES</h3>
+                            <strong><h3>EXPENSES</h3></strong>
                             <p className='amounts'>{ `$${expenses}` }</p>
                         </div>
                         <div className='individual--amounts'>
-                            <h3>BALANCE</h3>
+                            <strong><h3>BALANCE</h3></strong>
                             <p className='amounts'>{ `$${budget}` }</p>
                         </div>
                         <div className='svg--chart'>
-                            <div className="svg--placeholder">Chart will go here</div>
+                            <ProgressCircle
+                                strokeWidth="10"
+                                squareSize="200"
+                                percentage={this.state.percentage}
+                            />
                         </div>
                     </div>
                 </div>
 
                 <div className='dashboard--log-section'>
                     <div className='income--list'>
-                        <h5>Money In</h5>
+                        <strong><h5>Money In</h5></strong>
                         <ol className='type-columns income'>
                             {allItems.filter((item) => (
                                 item.type === 'income')).map((income) => (
@@ -244,7 +328,7 @@ class Dashboard extends Component {
                                 </li>
                             ))}
                         </ol>
-                        <form style={ showHideForm1 } onSubmit={this.handleSubmit.bind(this)}>
+                        <form style={ showHideForm1 } onSubmit={this.handleSubmit.bind(this)} className="entry--form">
                             <input className="item--description" type="text" name="description" placeholder="Enter Description" value={this.state.description} onChange={this.handleChange.bind(this)} />
                             <input className="item--amount" type="number" name="amount" placeholder="amount" value={this.state.amount} onChange={this.handleChange.bind(this)}/>
                             <br />
@@ -255,7 +339,7 @@ class Dashboard extends Component {
                         <button style={ showHideButton1 } onClick={this.toggleForm1} className='button--new-entry'>Add</button>
                     </div>
                     <div className='expense--list'>
-                        <h5>Money Out</h5>
+                        <strong><h5>Money Out</h5></strong>
                         <ol className='type-columns expenses'>
                             {allItems.filter((item) => (
                                 item.type === 'expense')).map((expense) => (
@@ -269,11 +353,10 @@ class Dashboard extends Component {
                                         </a>
                                         <button onClick={() => this.deleteEntry(expense)} className="expense--remove delete--button">X</button>
                                     </div>
-
                                 </li>
                             ))}
                         </ol>
-                        <form style={ showHideForm2 } onSubmit={this.handleSubmit.bind(this)}>
+                        <form style={ showHideForm2 } onSubmit={this.handleSubmit.bind(this)} className="entry--form">
                             <input className="item--description" type="text" name="description" placeholder="Enter Description" value={this.state.description} onChange={this.handleChange.bind(this)} />
                             <input className="item--amount" type="number" name="amount" placeholder="Amount" value={this.state.amount} onChange={this.handleChange.bind(this)}/>
                             <br />
@@ -287,6 +370,8 @@ class Dashboard extends Component {
         )
     }
 }
+
+
 
 Dashboard.propTypes = {
     username: PropTypes.string.isRequired
