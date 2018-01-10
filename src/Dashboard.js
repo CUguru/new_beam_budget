@@ -7,10 +7,10 @@ import { greenLogo } from './importImages/images'
 
 var styles = {
     out: {
-        backgroundColor: 'white'
+        backgroundColor: 'red'
     },
     in: {
-        backgroundColor: 'white'
+        backgroundColor: 'blue'
     }
 }
 
@@ -278,7 +278,7 @@ class Dashboard extends Component {
                             <input className="item--amount" type="number" name="amount" placeholder="Amount" value={this.state.amount} onChange={this.handleChange.bind(this)}/>
                             <br />
                             <input type="submit" value="Save" className='button--save-entry'/>
-                            <a hre="#" onClick={this.closeForm2} className='button--cancel'>Cancel</a>
+                            <a href="#" onClick={this.closeForm2} className='button--cancel'>Cancel</a>
                         </form>
                         <button style={ showHideButton2 } onClick={this.toggleForm2} className='button--new-entry'>Add</button>
                     </div>

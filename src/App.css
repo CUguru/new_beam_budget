@@ -164,9 +164,12 @@
 
 .income--list,
 .expense--list {
-  display: inline-block;
+  float: left;
   width: 48%;
-  margin-right: 1.5%;
+  border: 1px solid black;
+  /*display: inline-block;*/
+  /*width: 48%;*/
+  /*margin-right: 1.5%;*/
 }
 
 .button--new-entry {
