@@ -7,10 +7,10 @@ import { greenLogo } from './importImages/images'
 
 var styles = {
     out: {
-        backgroundColor: 'red'
+        backgroundColor: 'white'
     },
     in: {
-        backgroundColor: 'blue'
+        backgroundColor: 'white'
     }
 }
 
@@ -27,6 +27,8 @@ class Dashboard extends Component {
             budget: 0,
             showing1: false,
             showing2: false,
+            showAddButton1: true,
+            showAddButton2: true,
             hover: 'out'
         };
     }
@@ -51,7 +53,16 @@ class Dashboard extends Component {
         }
         this.setState({
             showing1: !this.state.showing1,
+            showAddButton1: !this.state.showAddButton1,
             type: 'income'
+        })
+    }
+
+    closeForm1 = () => {
+        console.log('Clicked on cancel, should close form')
+        this.setState({
+            showing1: !this.state.showing1,
+            showAddButton1: !this.state.showAddButton1
         })
     }
 
@@ -63,7 +74,16 @@ class Dashboard extends Component {
         }
         this.setState({
             showing2: !this.state.showing2,
+            showAddButton2: !this.state.showAddButton2,
             type: 'expense'
+        })
+    }
+
+    closeForm2 = () => {
+        console.log('Clicked on cancel, should close form')
+        this.setState({
+            showing2: !this.state.showing2,
+            showAddButton2: !this.state.showAddButton2
         })
     }
 
@@ -159,6 +179,12 @@ class Dashboard extends Component {
             display: this.state.showing2 ? "block" : "none"
         };
 
+        var showHideButton1 = {
+            display: this.state.showAddButton1 ? "block" : "none"
+        }
+        var showHideButton2 = {
+            display: this.state.showAddButton2 ? "block" : "none"
+        }
         // console.log(this.state.type);
 
         if(this.state.allItems.length > 0) {
@@ -207,22 +233,26 @@ class Dashboard extends Component {
                                 <li key={income.id} className="entry--details">
                                     <p className="entry--description">{income.description}</p>
                                     <div className="amount-and-button">
-                                        <a href="#"><p className="entry--amount">{income.amount}</p></a>
-                                        <button onClick={() => this.deleteEntry(income)}>Delete</button>
+                                        <a href="#" style={{...styles[this.state.hover]}}
+                                            onMouseEnter={this.showDelete.bind(this)}
+                                            onMouseLeave={this.hideDelete.bind(this)}>
+                                            <p className="entry--amount" id="income--amount">{`$${income.amount}`}</p>
+                                        </a>
+                                        <button onClick={() => this.deleteEntry(income)} className="income--remove delete--button">X</button>
                                     </div>
 
                                 </li>
                             ))}
                         </ol>
                         <form style={ showHideForm1 } onSubmit={this.handleSubmit.bind(this)}>
-
-                            <input type="text" name="description" placeholder="description" value={this.state.description} onChange={this.handleChange.bind(this)} />
-                            <input type="number" name="amount" placeholder="amount" value={this.state.amount} onChange={this.handleChange.bind(this)}/>
+                            <input className="item--description" type="text" name="description" placeholder="Enter Description" value={this.state.description} onChange={this.handleChange.bind(this)} />
+                            <input className="item--amount" type="number" name="amount" placeholder="amount" value={this.state.amount} onChange={this.handleChange.bind(this)}/>
                             <br />
                             <input type="submit" value="Save" className='button--save-entry'/>
-                            <button onClick={this.toggleForm1} className='button--cancel'>Cancel</button>
+                            <a href="#" onClick={this.closeForm1} className='button--cancel' name='cancel'>Cancel</a>
                         </form>
-                        <button onClick={this.toggleForm1} className='button--new-entry'>Add</button>
+
+                        <button style={ showHideButton1 } onClick={this.toggleForm1} className='button--new-entry'>Add</button>
                     </div>
                     <div className='expense--list'>
                         <h5>Money Out</h5>
@@ -235,23 +265,22 @@ class Dashboard extends Component {
                                         <a href="#" style={{...styles[this.state.hover]}}
                                             onMouseEnter={this.showDelete.bind(this)}
                                             onMouseLeave={this.hideDelete.bind(this)}>
-                                            <p className="entry--amount">{expense.amount}</p>
+                                            <p className="entry--amount" id="expense--amount">{`$${expense.amount}`}</p>
                                         </a>
-                                        <button onClick={() => this.deleteEntry(expense)}>Delete</button>
+                                        <button onClick={() => this.deleteEntry(expense)} className="expense--remove delete--button">X</button>
                                     </div>
 
                                 </li>
                             ))}
                         </ol>
                         <form style={ showHideForm2 } onSubmit={this.handleSubmit.bind(this)}>
-
-                            <input type="text" name="description" placeholder="description" value={this.state.description} onChange={this.handleChange.bind(this)} />
-                            <input type="number" name="amount" placeholder="amount" value={this.state.amount} onChange={this.handleChange.bind(this)}/>
+                            <input className="item--description" type="text" name="description" placeholder="Enter Description" value={this.state.description} onChange={this.handleChange.bind(this)} />
+                            <input className="item--amount" type="number" name="amount" placeholder="Amount" value={this.state.amount} onChange={this.handleChange.bind(this)}/>
                             <br />
                             <input type="submit" value="Save" className='button--save-entry'/>
-                            <button onClick={this.toggleForm2} className='button--cancel'>Cancel</button>
+                            <a hre="#" onClick={this.closeForm2} className='button--cancel'>Cancel</a>
                         </form>
-                        <button onClick={this.toggleForm2} className='button--new-entry'>Add</button>
+                        <button style={ showHideButton2 } onClick={this.toggleForm2} className='button--new-entry'>Add</button>
                     </div>
                 </div>
             </div>
