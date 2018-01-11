@@ -55,10 +55,18 @@ class ProgressCircle extends Component {
                         strokeDashoffset: offsetDash
                     }} />
                     <text
+                        className="circle--heading"
+                        x="23%"
+                        y="30%"
+                        dy=".3em"
+                        textAnchor="start">
+                        FINANCIAL HEALTH
+                    </text>
+                    <text
                         className="financial-health-text"
                         x="50%"
                         y="50%"
-                        dy=".3em"
+                        dy=".2em"
                         textAnchor="middle">
                         {`${this.props.percentage}%`}
                     </text>
@@ -68,7 +76,7 @@ class ProgressCircle extends Component {
 }
 
 ProgressCircle.defaultProps = {
-    squareSize: 200,
+    squareSize: 300,
     percentage: 0,
     strokeWidth: 10
 };
@@ -119,6 +127,7 @@ class Dashboard extends Component {
             })
         }
     }
+
     toggleForm1 = () => {
         if((this.state.showing2 === true) && (this.state.showAddButton2 === false)) {
             this.setState({
@@ -301,7 +310,7 @@ class Dashboard extends Component {
                         <div className='svg--chart'>
                             <ProgressCircle
                                 strokeWidth="10"
-                                squareSize="200"
+                                squareSize="250"
                                 percentage={this.state.percentage}
                             />
                         </div>
