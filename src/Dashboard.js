@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { guid } from './helpers/helper'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { greenLogo } from './importImages/images'
 
 var styles = {
@@ -21,6 +21,7 @@ class ProgressCircle extends Component {
     }
 
     render() {
+        let financeText;
         const squareSize = this.props.squareSize;
 
         const circleRadius = (this.props.squareSize - this.props.strokeWidth) / 2;
@@ -30,6 +31,18 @@ class ProgressCircle extends Component {
         const dashArray = circleRadius * Math.PI * 2;
 
         const offsetDash = dashArray - dashArray * this.props.percentage / 100;
+
+        if(this.props.percentage >= 90 ) {
+            financeText = 'Excellent!'
+        } else if((this.props.percentage >= 70) && (this.props.percentage < 90)) {
+            financeText = 'Very Good'
+        } else if((this.props.percentage >= 50) && (this.props.percentage < 70)) {
+            financeText = "Good"
+        } else if((this.props.percentage >= 25) && (this.props.percentage < 50)) {
+            financeText = "Fair"
+        } else if((this.props.percentage >= 0) && (this.props.percentage < 25)) {
+            financeText = "Poor"
+        }
 
         return(
             <svg
@@ -65,10 +78,10 @@ class ProgressCircle extends Component {
                     <text
                         className="financial-health-text"
                         x="50%"
-                        y="50%"
+                        y="60%"
                         dy=".2em"
                         textAnchor="middle">
-                        {`${this.props.percentage}%`}
+                        { financeText }
                     </text>
             </svg>
         );
@@ -77,7 +90,7 @@ class ProgressCircle extends Component {
 
 ProgressCircle.defaultProps = {
     squareSize: 300,
-    percentage: 0,
+    percentage: 1,
     strokeWidth: 10
 };
 
@@ -98,7 +111,7 @@ class Dashboard extends Component {
             showAddButton2: true,
             hover: 'out',
             username: this.props.username,
-            percentage: 0
+            percentage: 1
         };
     }
 
@@ -259,7 +272,9 @@ class Dashboard extends Component {
         })
     }
 
+
     render(){
+        // localStorage.setItem('myState', JSON.stringify(this.state))
         var showHideForm1 = {
             display: this.state.showing1 ? "block" : "none"
         };
@@ -275,14 +290,18 @@ class Dashboard extends Component {
             display: this.state.showAddButton2 ? "block" : "none"
         }
 
-
+        // var valuesToSave = localStorage.setItem('myState', JSON.stringify(this.state))
+        // var myLocalState = JSON.parse(localStorage.getItem('myState'))
+        // console.log(valuesToSave);
+        // localStorage.clear();
         // if(this.state.allItems.length >= 0) {
         //     const allItems = this.state.allItems
         // }
-        // const { username } = this.props
+
+        // console.log(valuesToSave)
         const { income, expenses, budget, allItems, username } = this.state
 
-        // console.log(username);
+
         return (
             <div className='dashboard'>
 
@@ -297,21 +316,21 @@ class Dashboard extends Component {
                     <div className='financial--summary'>
                         <div className='individual--amounts'>
                             <strong><h3>INCOME</h3></strong>
-                            <p className='amounts'>{ `$${income}` }</p>
+                            <p className='amounts'>{ `$${ income }` }</p>
                         </div>
                         <div className='individual--amounts'>
                             <strong><h3>EXPENSES</h3></strong>
-                            <p className='amounts'>{ `$${expenses}` }</p>
+                            <p className='amounts'>{ `$${ expenses }` }</p>
                         </div>
                         <div className='individual--amounts'>
                             <strong><h3>BALANCE</h3></strong>
-                            <p className='amounts'>{ `$${budget}` }</p>
+                            <p className='amounts'>{ `$${ budget }` }</p>
                         </div>
                         <div className='svg--chart'>
                             <ProgressCircle
                                 strokeWidth="10"
                                 squareSize="250"
-                                percentage={this.state.percentage}
+                                percentage={ this.state.percentage }
                             />
                         </div>
                     </div>
@@ -324,14 +343,15 @@ class Dashboard extends Component {
                             {allItems.filter((item) => (
                                 item.type === 'income')).map((income) => (
                                 <li key={income.id} className="entry--details">
+
                                     <p className="entry--description">{income.description}</p>
                                     <div className="amount-and-button">
-                                        <a href="#" style={{...styles[this.state.hover]}}
+                                        <button style={{...styles[this.state.hover]}}
                                             onMouseEnter={this.showDelete.bind(this)}
                                             onMouseLeave={this.hideDelete.bind(this)}>
                                             <p className="entry--amount" id="income--amount">{`$${income.amount}`}</p>
-                                        </a>
-                                        <button onClick={() => this.deleteEntry(income)} className="income--remove delete--button">X</button>
+                                        </button>
+                                        <button onClick={() => this.deleteEntry(income)} className="income--remove delete--button">x</button>
                                     </div>
 
                                 </li>
@@ -342,7 +362,7 @@ class Dashboard extends Component {
                             <input className="item--amount" type="number" name="amount" placeholder="amount" value={this.state.amount} onChange={this.handleChange.bind(this)}/>
                             <br />
                             <input type="submit" value="Save" className='button--save-entry'/>
-                            <a href="#" onClick={this.closeForm1} className='button--cancel' name='cancel'>Cancel</a>
+                            <button onClick={this.closeForm1} className='button--cancel' name='cancel'>Cancel</button>
                         </form>
 
                         <button style={ showHideButton1 } onClick={this.toggleForm1} className='button--new-entry'>Add</button>
@@ -355,12 +375,12 @@ class Dashboard extends Component {
                                 <li key={expense.id} className="entry--details">
                                     <p className="entry--description">{expense.description}</p>
                                     <div className="amount-and-button">
-                                        <a href="#" style={{...styles[this.state.hover]}}
+                                        <button style={{...styles[this.state.hover]}}
                                             onMouseEnter={this.showDelete.bind(this)}
                                             onMouseLeave={this.hideDelete.bind(this)}>
                                             <p className="entry--amount" id="expense--amount">{`$${expense.amount}`}</p>
-                                        </a>
-                                        <button onClick={() => this.deleteEntry(expense)} className="expense--remove delete--button">X</button>
+                                        </button>
+                                        <button onClick={() => this.deleteEntry(expense)} className="expense--remove delete--button">x</button>
                                     </div>
                                 </li>
                             ))}
@@ -370,7 +390,7 @@ class Dashboard extends Component {
                             <input className="item--amount" type="number" name="amount" placeholder="Amount" value={this.state.amount} onChange={this.handleChange.bind(this)}/>
                             <br />
                             <input type="submit" value="Save" className='button--save-entry'/>
-                            <a href="#" onClick={this.closeForm2} className='button--cancel'>Cancel</a>
+                            <button onClick={this.closeForm2} className='button--cancel'>Cancel</button>
                         </form>
                         <button style={ showHideButton2 } onClick={this.toggleForm2} className='button--new-entry'>Add</button>
                     </div>

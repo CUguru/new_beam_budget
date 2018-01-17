@@ -77,7 +77,6 @@
   display: inline-block;
   width: 25%;
   margin-top: 3em;
-  border: 1px solid black;
 }
 
 .beam--benefits p {
@@ -143,6 +142,12 @@
 }
 
 /* reponsive styles for Dashboard.js page */
+@media only screen and (min-width: 320px) and (max-width: 1024px) {
+  .income--list {
+    margin-bottom: 5em;
+  }
+}
+
 /* styling for amount display sections */
 .financial--summary {
   width: 80%;
@@ -257,6 +262,9 @@ h5 {
 }
 
 .entry--details {
+  width: 83%;
+  /*margin-right: auto;*/
+  /*margin-left: auto;*/
   position: relative;
   padding: 1.2em 0 0 0;
 }
@@ -274,6 +282,7 @@ h5 {
 }
 .entry--description {
   color: #808080;
+  text-align: left;
 }
 
 .entry--amount {
@@ -284,8 +293,10 @@ h5 {
   color: red;
 }
 .amount-and-button {
+  /*text-align: right;*/
   position: absolute;
-  left: 20em;
+  right: 0;
+  /*left: 20em;*/
 }
 
 #income--amount {
@@ -358,7 +369,7 @@ h5 {
   width: 64px;
   text-align: center;
   color: #808080;
-  margin-left: 3em;
+  margin-left: 1em;
   /*height: 24px;*/
 }
 
@@ -378,9 +389,9 @@ h5 {
 }
 
 .financial-health-text {
-  font-size: 13px;
-  font-weight: bold;
-  fill: red;
+  font-size: 20px;
+  font-weight: 300;
+  fill:  #a1a1a1;
 }
 
 .circle--heading {
@@ -390,8 +401,27 @@ h5 {
   font-weight: bold;
 }
 
+.delete--button {
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  /*border-radius: 50px;*/
+  /*padding: 0 .3em;*/
+  color: #43cea2;
+  margin-left: .5em;
+  transition: font-size .2s;
+}
 
-@media only screen and (max-width: 768px) {
+.expense--remove {
+  color: #ff5751;
+}
+.delete--button:hover {
+  font-size: 16px;
+}
+
+
+
+@media only screen and (max-width: 1024px) {
   .dashboard--upper-section {
     height: 100%;
     min-height: 300px;
@@ -411,13 +441,14 @@ h5 {
     float: none;
     width: 100%;
     text-align: center;
+    /*border: 1px solid black;*/
   }
   .svg--chart {
     width: 100%;
     text-align: center;
     right: 0em;
     bottom: 0em;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
   }
 
   svg {
@@ -436,11 +467,66 @@ h5 {
     padding-bottom: 1em;
     font-size: 20px;
   }
+  .dashboard--log-section {
+    width: 100%;
+    text-align: center;
+    margin-top: 2em;
+  }
+
+  .income--list,
+  .expense--list {
+    float: none;
+    width: 100%;
+  }
+
+  .income--list {
+    margin-right: 0%;
+  }
+
+  .button--new-entry {
+    margin-top: 1em;
+    margin-bottom: 3em;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .entry--details {
+    padding: 1.2em 0 0 0;
+    /*border: 1px solid black;*/
+  }
+
+
+  .entry--description,
+  .entry--amount,
+  .amount-and-button {
+    display: inline-block;
+  }
+
+  .entry--description,
+  .entry--amount {
+    font-size: 16px;
+  }
+
+  /* */
+
+  .entry--amount {
+    cursor: none;
+  }
+
+  /*.amount-and-button {
+    position: relative;
+    left: 0;
+    padding-left: 2em;
+    border: 1px solid black;
+  }*/
 }
 
-@media only screen and (min-width: 769px) and (max-width: 1024px) {
+/*@media only screen and (min-width: 769px) and (max-width: 1068px) {
+  .item--amount {
+    margin-left: 1em;
+  }
 
-}
+}*/
 
 @media only screen and (min-width: 1024px) and (max-width: 1280px) {
 
